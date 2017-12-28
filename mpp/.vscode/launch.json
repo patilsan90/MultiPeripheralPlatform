@@ -1,0 +1,14 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "gdb",
+            "request": "launch",
+            "cwd": "${workspaceRoot}",
+            "name": "PlatformIO Debugger",
+            "target": "c:/Users/patilsp/Documents/San27deep/PlatformX/Repos/MultiPeripheralPlatform/mpp/.pioenvs/esp32dev/firmware.elf",
+            "gdbpath": "C:/Users/patilsp/.platformio/penv/Scripts/piodebuggdb",
+            "autorun": [ "source .pioinit" ]
+        }
+    ]
+}
