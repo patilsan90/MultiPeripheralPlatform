@@ -38,6 +38,7 @@ int StorageUnit::convertStringToObj(String input)
       if (currentOwner.compareTo("NO_OWNER") != 0)
         if (currentOwner.compareTo(val) != 0)
         {
+          Serial.println("Current Owner :: "+currentOwner);
           return CONFIGURATION_OWNER_MISMATCH;
         }
 

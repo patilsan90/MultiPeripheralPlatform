@@ -1,21 +1,37 @@
 #include <Arduino.h>
 #include "StorageUnit.h"
+#include "ConfigurationMode.h"
+#include "Wifi.h"
 
 StorageUnit *storageUnit = new StorageUnit();
+ServerMode serverMode;
+OPERATION_MODE mode;
+
 void setup()
 {
     // put your setup code here, to run once:
     Serial.begin(115200);
-    String msg = "{\"owner_id\":\"9423306174\"}";
-    storageUnit->saveConfiguration(msg);
+
+    storageUnit->loadConfiguration();
+    mode = storageUnit->getOperarionMode();
+
+    //if (mode == e_CONFIG_MODE)
+    {
+        Serial.println(F("INIT in Config Mode"));
+        serverMode.init();
+    }
 }
 
 void loop()
 {
-    // put your main code here, to run repeatedly:
-    Serial.println("Testing code");
-    storageUnit->loadConfiguration();
-    Serial.println(storageUnit->owner_id);
-
-    delay(2000);
+  //  if (mode == e_CONFIG_MODE)
+    {
+        Serial.println(F("Working in Config Mode"));
+        Serial.printf("Stations connected = %d \n", WiFi.softAPgetStationNum());
+        serverMode.handleClient(); //Handle client requests
+        delay(1000);
+    }
+//    else{
+  //      Serial.println(F("Working in Reception Mode"));
+   // }
 }
