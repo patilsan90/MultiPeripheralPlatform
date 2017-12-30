@@ -2,7 +2,6 @@
 #define __STORAGE_UNIT__
 #include <string.h>
 #include <Arduino.h>
-#include <ESP8266WiFi.h>
 
 typedef enum OPERATION_MODE {
   e_CONFIG_MODE,

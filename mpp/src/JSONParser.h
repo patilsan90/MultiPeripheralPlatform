@@ -1,8 +1,6 @@
 #ifndef __JSON_PARSER__
 #define __JSON_PARSER__
-
-#include <ESP8266WiFi.h>
-
+#include <Arduino.h>
 #include <string.h>
 typedef struct jason
 {

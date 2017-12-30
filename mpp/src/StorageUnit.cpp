@@ -1,7 +1,10 @@
 #include <StorageUnit.h>
 #include <JSONParser.h>
-#include "FS.h"
+#include <WiFi.h>
+#include <SPIFFS.h>
+#include <FS.h>
 #include "error_codes.h"
+
 void StorageUnit::init()
 {
   Serial.println(F("Spiffs Storage Unit initializing....."));
@@ -21,7 +24,8 @@ int StorageUnit::convertStringToObj(String input)
   JSONParser *parser = new JSONParser();
   parser->parse(input);
 
-  Serial.println(parser->total_pairs);
+  Serial.printf("Total JSON pairs:: %d\n ", parser->total_pairs);
+
   int config_details_counter = 0;
   for (int i = 0; i < parser->total_pairs; i++)
   {
@@ -33,7 +37,9 @@ int StorageUnit::convertStringToObj(String input)
       val.trim();
       if (currentOwner.compareTo("NO_OWNER") != 0)
         if (currentOwner.compareTo(val) != 0)
+        {
           return CONFIGURATION_OWNER_MISMATCH;
+        }
 
       config_details_counter++;
       this->owner_id = (String)parser->pairs[i].val;
@@ -56,8 +62,9 @@ int StorageUnit::convertStringToObj(String input)
     }
 
     Serial.print(parser->pairs[i].key);
+    Serial.print(" : ");
     Serial.print(parser->pairs[i].val);
-    Serial.println(" :: ");
+    Serial.println();
   }
   Serial.println(F("******PARSING DONE ......"));
 
@@ -239,7 +246,12 @@ String StorageUnit::getOwner()
   {
     Serial.println(F("====== Reading to SPIFFS owner_id file ========="));
     String owner = file.readStringUntil('\n');
+    owner.trim();
     file.close();
+
+    if (0 == owner.length())
+      return "NO_OWNER";
+
     return owner;
   }
 }
