@@ -4,10 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
-#include <SoftwareSerial.h>
-
-#define RX (13) //(14) // *** PB, Pin 0
-#define TX (15) //(12) // *** PB, Pin 3
+#include "pin_configuration.h"
 
 #define NO_ID ("NO_ID")
 
@@ -20,10 +17,10 @@ class Peripheral
 public:
   Peripheral()
   {
-    perSerial = new SoftwareSerial(RX, TX, false, 256);
-    perSerial->begin(19200);
+    perSerial = new HardwareSerial(1);
+    perSerial->begin(19200, SERIAL_8N1, PIN_PERIPHERAL_RX, PIN_PERIPHERAL_TX);
   }
-  SoftwareSerial *perSerial;
+  HardwareSerial *perSerial;
 
   bool isConnected();
   String getDeviceRegID();

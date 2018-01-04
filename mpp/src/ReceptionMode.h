@@ -1,11 +1,10 @@
 #ifndef __RECEPTION_MODE__
 #define __RECEPTION_MODE__
 
-#include <ESP8266WebServer.h>
+#include <ESP32WebServer.h>
 #include "StorageUnit.h"
 
-//#define MAX_NUMBER_OF_PERIPHERALS (16)
-#define MAX_NUMBER_OF_PERIPHERALS (1)
+#define MAX_NUMBER_OF_PERIPHERALS (16)
 
 class ReceptionMode
 {

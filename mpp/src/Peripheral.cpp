@@ -1,7 +1,7 @@
 
 #include <string.h>
-#include <ESP8266WiFi.h>
-#include <ESP8266WebServer.h>
+#include <WiFi.h>
+#include <ESP32WebServer.h>
 #include <Peripheral.h>
 #include <pin_configuration.h>
 

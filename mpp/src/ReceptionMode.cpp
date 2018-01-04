@@ -3,10 +3,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include <ESP8266WiFi.h>
+#include <WiFi.h>
+#include <WiFiMulti.h>
 #include <WiFiClient.h>
 #include <WiFiServer.h>
-#include <ESP8266HTTPClient.h>
+#include <HTTPClient.h>
 #include <ReceptionMode.h>
 #include <Peripheral.h>
 #include "pin_configuration.h"
@@ -30,7 +31,7 @@ String updates_from_peripherals_to_server;
 void ReceptionMode ::init(StorageUnit *in_storage)
 {
   storage = in_storage;
-  WiFi.hostname("SinglePeripheralPlatform");
+  WiFi.setHostname("SinglePeripheralPlatform");
   WiFi.mode(WIFI_AP_STA);
   //WiFi.mode(WIFI_STA);
   //storage->wifi_ssid.trim();
@@ -39,7 +40,7 @@ void ReceptionMode ::init(StorageUnit *in_storage)
   WiFi.begin(storage->wifi_ssid.c_str(), storage->wifi_psw.c_str());
 
   // TODO:: Below line is for testing purpose, and need to be removed in actual code.
-  storage->server_url = "http://192.168.1.2:8090/smart_home";
+  storage->server_url = "http://192.168.1.5:8090/smart_home";
 
   /*
    *  Below commented code line is kept for future reference and debug purpose.
